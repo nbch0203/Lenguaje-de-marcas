@@ -290,3 +290,16 @@ body {
     font-size: 0.9em;
   }
   
+  .foot{
+    display: flex;
+    padding: 50px 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 0 --20px;
+    text-align: left;
+  }
+
+  .footdiv{
+    font-size: 17px;
+    padding: 0px 20px;
+  }
