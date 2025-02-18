@@ -1,0 +1,17 @@
+.calculadora {
+	background-color: #3a4452;
+	text-align: left;
+	border: 2px solid black;
+  box-shadow: 8px 8px 15px white;
+	border-radius: 10%;
+	padding: 10px 5px;
+	margin: auto;
+  color: #fff;
+	}
+
+.titulo{
+  font: oblique bold 120% cursive;
+  font-size: 70px;
+  color: rgb(31, 0, 62, .7);
+  text-shadow: 8px 8px 30px #000, 10px 10px 15px #ff00ff;
+}

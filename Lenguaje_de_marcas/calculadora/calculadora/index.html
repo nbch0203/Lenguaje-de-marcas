@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CALCULADORA</title>
+		<script type="text/javascript" src="main.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body bgcolor="lightcyan">
+		<table class="calculadora">
+			<row>
+				<tr>
+					<h1 style="text-align: center" class="titulo">Calculadora</h1>
+				</tr>
+				<tr>
+					<th colspan="100%">
+						<form name="insertar">
+							<input type="Text" name = "pantalla" value="" size="20" class="result">
+						</form>
+					</th>
+				</tr>
+				<form name="botones">
+					<tr>
+						<td><input type="button" value="AC" onclick="limpiar()" class="btn operator"></td>
+						<td><input type="button" value="DE" onclick="deleteLast()" class="btn operator"></td>
+						<td><input type="button" value="PI" onclick="number('3.1415')" class="btn operator"></td>
+						<td><input type="button" value="/" onclick="number('/')" class="btn operator"></td>
+					</tr>
+					<tr>
+						<td><input type="button" value="7" onclick="number(7)" class="btn"></td>
+						<td><input type="button" value="8" onclick="number(8)" class="btn"></td>
+						<td><input type="button" value="9" onclick="number(9)" class="btn"></td>
+						<td><input type="button" value="*" onclick="number('*')" class="btn operator"></td>
+					</tr>
+						<td><input type="button" value="4" onclick="number(4)" class="btn"></td>
+						<td><input type="button" value="5" onclick="number(5)" class="btn"></td>
+						<td><input type="button" value="6" onclick="number(6)" class="btn"></td>
+						<td><input type="button" value="-" onclick="number('-')" class="btn operator"></td>
+					<tr>
+					</tr>
+					<tr>
+						<td><input type="button" value="1" onclick="number(1)" class="btn"></td>
+						<td><input type="button" value="2" onclick="number(2)" class="btn"></td>
+						<td><input type="button" value="3" onclick="number(3)" class="btn"></td>
+						<td rowspan="2"><input type="button" value="+" onclick="number('+')" class="btn2row operator"></td>					
+					</tr>
+					<tr>
+						<td><input type="button" value="." onclick="number('.')" class="btn operator"></td>
+						<td><input type="button" value="0" onclick="number(0)" class="btn"></td>
+						<td><input type="button" value="√" onclick="number('**(1/2)')" class="btn operator"></td>
+					</tr>
+					<tr>
+						<td><input type="button" value="(" onclick="parentesisAbrir()" class="btn operator"></td>
+						<td><input type="button" value=")" onclick="parentesisCerrar()" class="btn operator"></td>
+						<td colspan="2"><input type="button" value="=" onclick="operateAll()" class="btn2col fill operator"></th>
+					</tr>
+				<form>
+					<tr>
+						<center>
+							<a href="info.html">PULSE AQUÍ PARA VER EL SIGNIFICADO DE LOS SÍMBOLOS</a><br><br>
+						</center>
+					</tr>
+			</row>
+		</table>
+	</body>
+</html>
