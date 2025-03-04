@@ -16,6 +16,9 @@ public class MiControlador {
 	@Autowired
 	List<Alumno> alumnos;
 	
+	@Autowired
+	HashMap<Integer, Alumno> alumnos_hash;
+	
 	@GetMapping("/get_alumnos")
 	public List<Alumno> get_alumnos(){
 		return alumnos;
@@ -32,9 +35,10 @@ public class MiControlador {
 		if(alumnos_hash.containsKey(id_alumno)) {
 			return 1;
 		}else {
-			alumnos_hashmap.put(id_alumno, alumno);
+			alumnos_hash.put(id_alumno, alumno);
 			alumnos.add(alumno);
 		}
+		return 0;
 	}
 	
 	
