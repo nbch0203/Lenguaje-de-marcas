@@ -1,71 +1,69 @@
-const peliculas = [];
-
-document.getElementById("peliculaForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const id = parseInt(document.getElementById("id_pelicula").value);
+function enviarDatos() {
+  const id_pelicula = document.getElementById("id_pelicula").value.trim();
   const titulo = document.getElementById("titulo").value.trim();
-  const genero = document.getElementById("genero").value;
-  const autor = document.getElementById("autor").value.trim();
-  const año = parseInt(document.getElementById("año").value);
-  const mensajeDiv = document.getElementById("mensaje");
+  const genero = document.getElementById("genero").value.trim();
+  const director = document.getElementById("director").value.trim();
+  const año = document.getElementById("año").value.trim();
 
-  // Validación
-  if (!id || !titulo || !genero || !autor || !año) {
-    mensajeDiv.innerText = "❌ Todos los campos deben estar completos.";
-    mensajeDiv.style.color = "red";
-    return;
+  if (!id_pelicula || !titulo || !genero || !director || año.length !== 4) {
+      alert("Por favor, rellena todos los campos correctamente.");
+      return;
   }
 
-  // Verificación de duplicado
-  const existe = peliculas.some(p => p.id_pelicula === id);
-  if (existe) {
-    mensajeDiv.innerText = `❌ Ya existe una película con el ID ${id}.`;
-    mensajeDiv.style.color = "red";
-    return;
-  }
+  const pelicula = {
+      id_pelicula: id_pelicula,
+      titulo: titulo,
+      genero: genero,
+      autor: director,
+      año: año
+  };
 
-  // Añadir película
-  const pelicula = { id_pelicula: id, titulo, genero, autor, año };
-  peliculas.push(pelicula);
-
-  mensajeDiv.innerText = "✅ Película añadida correctamente.";
-  mensajeDiv.style.color = "green";
-  this.reset();
-});
-
-document.getElementById("mostrarPeliculasBtn").addEventListener("click", function() {
-  const tablaDiv = document.getElementById("tablaPeliculas");
-  tablaDiv.innerHTML = "";
-
-  if (peliculas.length === 0) {
-    tablaDiv.innerHTML = "<p>No hay películas registradas.</p>";
-    return;
-  }
-
-  const tabla = document.createElement("table");
-  const cabecera = `
-    <tr>
-      <th>ID</th>
-      <th>Título</th>
-      <th>Género</th>
-      <th>Autor</th>
-      <th>Año</th>
-    </tr>
-  `;
-  tabla.innerHTML = cabecera;
-
-  peliculas.forEach(p => {
-    const fila = document.createElement("tr");
-    fila.innerHTML = `
-      <td>${p.id_pelicula}</td>
-      <td>${p.titulo}</td>
-      <td>${p.genero}</td>
-      <td>${p.autor}</td>
-      <td>${p.año}</td>
-    `;
-    tabla.appendChild(fila);
+  fetch("http://localhost:8080/addpelicula", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(pelicula)
+  })
+  .then(res => res.json())
+  .then(res => {
+      const mensaje = document.getElementById("mensaje");
+      if (res === 0) {
+          mensaje.innerText = "Película añadida exitosamente.";
+          cargarPeliculas();
+      } else {
+          mensaje.innerText = "Ya existe una película con ese ID.";
+      }
   });
+}
 
-  tablaDiv.appendChild(tabla);
-});
+
+function cargarPeliculas() {
+  fetch("http://localhost:8080/getpeliculas")
+  .then(res => res.json())
+  .then(data => {
+      const tabla = data.map(p => `
+          <tr>
+              <td>${p.id_pelicula}</td>
+              <td>${p.titulo}</td>
+              <td>${p.autor}</td>
+              <td>${p.genero}</td>
+              <td>${p.año}</td>
+          </tr>
+      `).join("");
+
+      document.getElementById("tablaPeliculas").innerHTML = `
+          <table>
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>Título</th>
+                      <th>Director</th>
+                      <th>Género</th>
+                      <th>Año</th>
+                  </tr>
+              </thead>
+              <tbody>${tabla}</tbody>
+          </table>`;
+    });
+}
