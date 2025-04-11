@@ -11,7 +11,7 @@ import com.example.res_alumnos.util.Alumno;
 public class MiConfiguracion {
 	@Bean
 	public List<Alumno> get_alumnos(){
-		List<Alumno> alumnos = new ArrayList();
+		List<Alumno> alumnos = new ArrayList<Alumno>();
 		Alumno a1=new Alumno(1,"ana","Marcas",6.6);
 		alumnos.add(a1);
 		Alumno a2=new Alumno(2,"juan","Marcas",4.6);
